@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@axelar-network/axelar-gmp-sdk-solidity/contracts/interfaces/IERC20.sol";
 import "@axelar-network/axelar-gmp-sdk-solidity/contracts/executable/AxelarExecutable.sol";
 import "@axelar-network/axelar-gmp-sdk-solidity/contracts/upgradable/Upgradable.sol";
 import "@axelar-network/axelar-gmp-sdk-solidity/contracts/utils/AddressString.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract MyContract is AxelarExecutable, Upgradable {
     using AddressToString for address;
+    using SafeERC20 for IERC20;
 
     bytes32 constant CONTRACT_ID = keccak256("my-project-my-contract");
 
@@ -61,7 +62,7 @@ contract MyContract is AxelarExecutable, Upgradable {
         uint256 amount
     ) external {
         IERC20 token = IERC20(gateway.tokenAddresses(tokenSymbol));
-        token.approve(address(gateway), amount);
+        token.safeApprove(address(gateway), amount);
 
         gateway.callContractWithToken(
             destinationChain,
