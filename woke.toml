@@ -2,6 +2,9 @@
 ignore_paths = ["node_modules", ".woke-build", "venv", "lib"]
 include_paths = ["node_modules"]
 
+[compiler.solc.optimizer]
+enabled = true
+
 [detectors]
 exclude = []
 ignore_paths = ["node_modules", ".woke-build", "venv", "lib"]
