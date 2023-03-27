@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "@axelar-network/axelar-cgp-solidity": "^4.5.0",
-    "@axelar-network/axelar-gmp-sdk-solidity": "^3.2.1"
+    "@axelar-network/axelar-gmp-sdk-solidity": "^3.2.1",
+    "@openzeppelin/contracts": "^4.8.2"
   }
 }
