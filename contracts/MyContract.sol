@@ -9,8 +9,11 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 contract MyContract is AxelarExecutable, Upgradable {
     using AddressToString for address;
     using SafeERC20 for IERC20;
+    using StringToAddress for string;
 
     bytes32 constant CONTRACT_ID = keccak256("my-project-my-contract");
+
+    error InvalidSourceAddress();
 
     event PayloadReceived(string sourceChain, string sourceAddress, bytes payload);
 
@@ -35,6 +38,8 @@ contract MyContract is AxelarExecutable, Upgradable {
         string calldata sourceAddress,
         bytes calldata payload
     ) internal override {
+        if (sourceAddress.toAddress() != address(this))
+            revert InvalidSourceAddress();
         emit PayloadReceived(sourceChain, sourceAddress, payload);
     }
 
@@ -45,6 +50,8 @@ contract MyContract is AxelarExecutable, Upgradable {
         string calldata tokenSymbol,
         uint256 amount
     ) internal override {
+        if (sourceAddress.toAddress() != address(this))
+            revert InvalidSourceAddress();
         emit PayloadWithTokenReceived(sourceChain, sourceAddress, payload, tokenSymbol, amount);
     }
 
