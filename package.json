@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "author": "Ackee Blockchain",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@axelar-network/axelar-gmp-sdk-solidity": "^3.2.1"
+  }
 }
